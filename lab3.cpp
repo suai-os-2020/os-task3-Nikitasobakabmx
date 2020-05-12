@@ -30,13 +30,16 @@ public:
         _lock = CreateMutex(NULL, false, _name);
         if(_lock == NULL)
             throw GetLastError();
+        _status = false;
     }
     void lock()
     {
         _lock = OpenMutex(MUTEX_ALL_ACCESS, true, _name);
+        _status = true;
     }
     void unlock()
     {
+        _status = false;
         ReleaseMutex(_lock);
     }
 
@@ -50,12 +53,13 @@ class Sem
 {
 private:
     HANDLE _sem;
+    LPCTSTR _name;
 public:
-    Sem(int count = 0, int max = 10)
+    Sem(int count = 0, int max = 20)
     {
 //        nameless
         _sem = CreateSemaphore(NULL,
-                count, max, NULL);
+                count, max, _name);
     }
     void push(int count = 1)
     {
@@ -63,7 +67,7 @@ public:
     }
     void wait()
     {
-        WaitForSingleObject(_sem, 0L);
+        WaitForSingleObject(_sem, INFINITE);
     }
     ~Sem()
     {
@@ -260,8 +264,6 @@ DWORD WINAPI thread_n(LPVOID val)
     doSmth("n", tmp->sem, threads['g']->sem);
     doSmth("n", tmp->sem, threads['g']->sem);
     doSmth("n", tmp->sem, threads['g']->sem);
-//    doSmth("n");
-//    doSmth("n");
     return 0;
 }
 DWORD WINAPI thread_p(LPVOID val)
@@ -304,7 +306,7 @@ void init_threads(std::string seq, std::string sem)
     int count = 1;
     for(auto it : sem)
     {
-        threads[it]->sem = new Sem(0, count);
+        threads[it]->sem = new Sem(count);
         if (count)
             count--;
     }
@@ -348,7 +350,7 @@ func fabric(char chose)
 }
 void cond()
 {
-    static Sem sem(0);
+    static Sem sem(0, 10);
     static Mutex mtx;
     static int tmp[7] = {1, 3, 5, 5, 6, 4, 3};
     static int tact = 0;
@@ -363,6 +365,7 @@ void cond()
         sem.push(tmp[tact]);
         tact++;
         count = 0;
+        std::cout << std::endl;
     }
     mtx.unlock();
     sem.wait();

@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Nikittossii/Documents/os-task3-Nikitasobakabmx/lab3.cpp
+lab3.h
+C:/Users/Nikittossii/Documents/os-task3-Nikitasobakabmx/lab3.h
+windows.h
+-
+map
+-
+cstring
+-
+
+C:/Users/Nikittossii/Documents/os-task3-Nikitasobakabmx/lab3.h
+iostream
+-
+random
+-
+

@@ -23,23 +23,19 @@ class Mutex
 private:
     HANDLE _lock;
     LPCTSTR _name;
-    bool _status;
 public:
     Mutex()
     {
         _lock = CreateMutex(NULL, false, _name);
         if(_lock == NULL)
             throw GetLastError();
-        _status = false;
     }
     void lock()
     {
         _lock = OpenMutex(MUTEX_ALL_ACCESS, true, _name);
-        _status = true;
     }
     void unlock()
     {
-        _status = false;
         ReleaseMutex(_lock);
     }
 
@@ -53,13 +49,13 @@ class Sem
 {
 private:
     HANDLE _sem;
-    LPCTSTR _name;
 public:
     Sem(int count = 0, int max = 20)
     {
-//        nameless
         _sem = CreateSemaphore(NULL,
-                count, max, _name);
+                count, max, NULL);
+        if(_sem == NULL)
+            throw GetLastError();
     }
     void push(int count = 1)
     {
@@ -80,6 +76,7 @@ struct Thread
     HANDLE hThread;
     DWORD tid;
     Sem *sem;
+    Sem *_selfSem;
     char name;
     STATUS status;
     func function;
@@ -89,12 +86,14 @@ struct Thread
         this->name = name;
         sem = new Sem();
         function = fabric(name);
+//        _selfSem = new Sem();
         status = PENDING;
     }
     static DWORD WINAPI wrapper(LPVOID ptr)
     {
         Thread *tmp = (Thread*) ptr;
         tmp->status = RUNNING;
+//        tmp->_selfSem->push();
         tmp->function(ptr);
         tmp->status = DONE;
         ExitThread(0);
@@ -107,7 +106,7 @@ struct Thread
     }
     void wait()
     {
-        while(status == PENDING);
+//        _selfSem ->wait();// wait while pending
         WaitForSingleObject(hThread, INFINITE);
     }
     ~Thread()
@@ -162,9 +161,11 @@ std::string underSem("gkmn");
 
 int lab3_init()
 {
+
     init_threads(seq, underSem);
     run_threads("a");
     wait(seq);
+    std::cout << std::endl;
     threads.clear();
     return 0;
 }
@@ -365,7 +366,6 @@ void cond()
         sem.push(tmp[tact]);
         tact++;
         count = 0;
-//        std::cout << std::endl;
     }
     mtx.unlock();
     sem.wait();

@@ -365,7 +365,7 @@ void cond()
         sem.push(tmp[tact]);
         tact++;
         count = 0;
-        std::cout << std::endl;
+//        std::cout << std::endl;
     }
     mtx.unlock();
     sem.wait();

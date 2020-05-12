@@ -32,7 +32,8 @@ public:
     }
     void lock()
     {
-        _lock = OpenMutex(MUTEX_ALL_ACCESS, true, _name);
+        WaitForSingleObject(_lock, INFINITE);
+//        _lock = OpenMutex(MUTEX_ALL_ACCESS, true, _name);
     }
     void unlock()
     {
@@ -161,7 +162,6 @@ std::string underSem("gkmn");
 
 int lab3_init()
 {
-
     init_threads(seq, underSem);
     run_threads("a");
     wait(seq);

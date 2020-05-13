@@ -150,11 +150,11 @@ unsigned int lab3_thread_graph_id()
 }
 const char* lab3_unsynchronized_threads()
 {
-    return "bcf";
+    return (char*)"bcf";
 }
 const char* lab3_sequential_threads()
 {
-    return "gkmn";
+    return (char*)"gkmn";
 }
 
 std::string seq("abcdefghikmnpr");
@@ -165,7 +165,6 @@ int lab3_init()
     init_threads(seq, underSem);
     run_threads("a");
     wait(seq);
-    std::cout << std::endl;
     threads.clear();
     return 0;
 }

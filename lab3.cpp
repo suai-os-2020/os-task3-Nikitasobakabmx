@@ -3,6 +3,9 @@
 #include <map>
 #include <cstring>
 
+#include <iostream>
+#include <string>
+
 #define Q 3
 #define in_range(n) = 0; i < n; i++
 // definition

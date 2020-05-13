@@ -6,7 +6,7 @@
 #define Q 3
 #define in_range(n) = 0; i < n; i++
 // definition
-typedef DWORD WINAPI (*func) (LPVOID);
+using func = void* (*)(void*);
 
 enum STATUS
 {
@@ -121,20 +121,20 @@ struct Thread
 // Important
 std::map<char, Thread*> threads;
 
-DWORD WINAPI thread_a(LPVOID val);
-DWORD WINAPI thread_b(LPVOID val);
-DWORD WINAPI thread_c(LPVOID val);
-DWORD WINAPI thread_d(LPVOID val);
-DWORD WINAPI thread_e(LPVOID val);
-DWORD WINAPI thread_f(LPVOID val);
-DWORD WINAPI thread_g(LPVOID val);
-DWORD WINAPI thread_h(LPVOID val);
-DWORD WINAPI thread_i(LPVOID val);
-DWORD WINAPI thread_k(LPVOID val);
-DWORD WINAPI thread_m(LPVOID val);
-DWORD WINAPI thread_n(LPVOID val);
-DWORD WINAPI thread_p(LPVOID val);
-DWORD WINAPI thread_r(LPVOID val);
+void* thread_a(void* val);
+void* thread_b(void* val);
+void* thread_c(void* val);
+void* thread_d(void* val);
+void* thread_e(void* val);
+void* thread_f(void* val);
+void* thread_g(void* val);
+void* thread_h(void* val);
+void* thread_i(void* val);
+void* thread_k(void* val);
+void* thread_m(void* val);
+void* thread_n(void* val);
+void* thread_p(void* val);
+void* thread_r(void* val);
 
 // support function
 void doSmth(std::string name, Sem *semA = nullptr, Sem *semB = nullptr);
@@ -182,31 +182,31 @@ void wait(std::string flow)
         threads[it]->wait();
 }
 
-DWORD WINAPI thread_a(LPVOID val)
+void* thread_a(void* val)
 {
     doSmth("a");
     run_threads("bcf");
     return 0;
 }
-DWORD WINAPI thread_b(LPVOID val)
+void* thread_b(void* val)
 {
     doSmth("b");
     run_threads("ged");
 return 0;
 }
-DWORD WINAPI thread_c(LPVOID val)
+void* thread_c(void* val)
 {
     doSmth("c");
     doSmth("c");
     run_threads("rh");
     return 0;
 }
-DWORD WINAPI thread_d(LPVOID val)
+void* thread_d(void* val)
 {
     doSmth("d");
     return 0;
 }
-DWORD WINAPI thread_e(LPVOID val)
+void* thread_e(void* val)
 {
     doSmth("e"); 
     doSmth("e");
@@ -214,7 +214,7 @@ DWORD WINAPI thread_e(LPVOID val)
     run_threads("k");
     return 0;
 }
-DWORD WINAPI thread_f(LPVOID val)
+void* thread_f(void* val)
 {
     doSmth("f");
     doSmth("f");
@@ -222,7 +222,7 @@ DWORD WINAPI thread_f(LPVOID val)
     run_threads("imn");
     return 0;
 }
-DWORD WINAPI thread_g(LPVOID val)
+void* thread_g(void* val)
 {
     Thread *tmp = (Thread*) val;
     doSmth("g");
@@ -232,18 +232,18 @@ DWORD WINAPI thread_g(LPVOID val)
     doSmth("g", tmp->sem, threads['n']->sem);
     return 0;
 }
-DWORD WINAPI thread_h(LPVOID val)
+void* thread_h(void* val)
 {  
     doSmth("h");
     return 0;
 }
-DWORD WINAPI thread_i(LPVOID val)
+void* thread_i(void* val)
 {
     doSmth("i");
     return 0;
 
 }
-DWORD WINAPI thread_k(LPVOID val)
+void* thread_k(void* val)
 {
     Thread *tmp = (Thread*) val;
     doSmth("k", tmp->sem, threads['m']->sem);
@@ -251,7 +251,7 @@ DWORD WINAPI thread_k(LPVOID val)
     return 0;
 
 }
-DWORD WINAPI thread_m(LPVOID val)
+void* thread_m(void* val)
 {
     Thread* tmp = (Thread*) val;
     doSmth("m", tmp->sem, threads['n']->sem);
@@ -259,7 +259,7 @@ DWORD WINAPI thread_m(LPVOID val)
     return 0;
 
 }
-DWORD WINAPI thread_n(LPVOID val)
+void* thread_n(void* val)
 {
     Thread* tmp = (Thread*) val;
     doSmth("n", tmp->sem, threads['g']->sem);
@@ -267,12 +267,12 @@ DWORD WINAPI thread_n(LPVOID val)
     doSmth("n", tmp->sem, threads['g']->sem);
     return 0;
 }
-DWORD WINAPI thread_p(LPVOID val)
+void* thread_p(void* val)
 {
     doSmth("p");
     return 0;
 }
-DWORD WINAPI thread_r(LPVOID val)
+void* thread_r(void* val)
 {
     doSmth("r");
     doSmth("r");

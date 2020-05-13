@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Nikittossii/Documents/os-task3-Nikitasobakabmx/test/gtest
+# Install script for directory: C:/Users/Nikittossii/Documents/HiSuite/os-task3-Nikitasobakabmx/test/gtest
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

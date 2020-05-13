@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Nikittossii/Documents/os-task3-Nikitasobakabmx/test
+# Install script for directory: C:/Users/Nikittossii/Documents/HiSuite/os-task3-Nikitasobakabmx/test
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,7 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Users/Nikittossii/Documents/os-task3-Nikitasobakabmx/cmake-build-debug/test/gtest/cmake_install.cmake")
+  include("C:/Users/Nikittossii/Documents/HiSuite/os-task3-Nikitasobakabmx/cmake-build-debug/test/gtest/cmake_install.cmake")
 
 endif()
 

@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/Nikittossii/Documents/os-task3-Nikitasobakabmx/lab3.cpp
+C:/Users/Nikittossii/Documents/HiSuite/os-task3-Nikitasobakabmx/lab3.cpp
 lab3.h
-C:/Users/Nikittossii/Documents/os-task3-Nikitasobakabmx/lab3.h
+C:/Users/Nikittossii/Documents/HiSuite/os-task3-Nikitasobakabmx/lab3.h
 windows.h
 -
 map
@@ -16,7 +16,7 @@ map
 cstring
 -
 
-C:/Users/Nikittossii/Documents/os-task3-Nikitasobakabmx/lab3.h
+C:/Users/Nikittossii/Documents/HiSuite/os-task3-Nikitasobakabmx/lab3.h
 iostream
 -
 random
